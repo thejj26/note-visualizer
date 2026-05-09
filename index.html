@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="visualizer-container">
+            <h2 id="title">something</h2>
+        </div>
+        <div class="controls-container">
+            <div class="tab-selector">
+                <ul class="selector tab">
+                    <li id="chords">CHORDS</li>
+                    <li id="scales">SCALES</li>
+                </ul>
+            </div>
+            <div class="mode-selector">
+                <ul class="selector chords" id="chords-selector">
+                    <li value="major">Major</li>
+                    <li value="major7">Major 7</li>
+                    <li value="minor">Minor</li>
+                    <li value="minor7">Minor 7</li>
+                    <li value="dominant7">Dominant 7</li>
+                </ul>
+                <ul class="selector scales" id="scales-selector">
+                    <li value="major">Major</li>
+                    <li value="minor">Minor</li>
+                    <li value="major_pentatonic">Major Pentatonic</li>
+                    <li value="minor_pentatonic">Minor Pentatonic</li>
+                    <li value="harmonic">Harmonic</li>
+                </ul>
+            </div>
+            <div class="root-selector">
+                <ul class="selector root" id="root-selector">
+                    <li value="0"></li>
+                    <li value="1"></li>
+                    <li value="2"></li>
+                    <li value="3"></li>
+                    <li value="4"></li>
+                    <li value="5"></li>
+                    <li value="6"></li>
+                    <li value="7"></li>
+                    <li value="8"></li>
+                    <li value="9"></li>
+                    <li value="10"></li>
+                    <li value="11"></li>
+                </ul>
+            </div>
+            <div class="settings">
+                <div class="note-style">
+                    <div>
+                        <p>NOTE STYLE</p>
+                        <span id="default-notes">Default</span>
+                        <span id="alternative-notes">Alternative</span>
+                    </div>
+                    <div>
+                        <p>SEMITONES</p>
+                        <span id="sharp-notes">Sharp</span>
+                        <span id="flat-notes">Flat</span>
+                    </div>
+                </div>
+                <div class="fret-range">
+                    <p>FRET RANGE</p>
+                    <span>FROM</span>
+                    <input type="number" id="input-min" min="0" max="12">
+                    <span>TO</span>
+                    <input type="number" id="input-max" min="4" max="21">
+                </div>
+                <div class="tuning"></div>
+            </div>
+        </div>
+    </div>
+    <script src="notes.js"></script>
+    <script src="interface.js"></script>
+</body>
+
+</html>
