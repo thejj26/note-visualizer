@@ -71,11 +71,14 @@ const SHAPES = {
 };
 
 //user settings
-let notes = NOTES_DEFAULT;  //default or alternative note display
-let flat = false;           //true=notes display as sharp, false=notes display as flat
-let max_fret = 12;          //last fret
-let min_fret = 0;           //first fret
-let tuning = [7, 0, 5, 10]; //EADG is the standard tuning
+let SETTINGS = {
+    notes: NOTES_DEFAULT,  //default or alternative note display
+    flat: false,           //true=notes display as sharp, false=notes display as flat
+    max_fret: 12,          //last fret
+    min_fret: 0,           //first fret
+    tuning: [7, 0, 5, 10]  //EADG is the standard tuning
+}
+
 
 let fretboard = fillFretboard();                //2D matrix - x=fret, y=string
 let fretboard_filtered = filterFretboard([]);   //fretboard with only desired notes
@@ -95,9 +98,9 @@ function generateNotes(root, shape) {
 function fillFretboard() {
     let result = [];
 
-    for (let i = 0; i < tuning.length; i++) {   //adds an array for each string
+    for (let i = 0; i < SETTINGS.tuning.length; i++) {   //adds an array for each string
         result.push([]);
-        for (let j = min_fret; j <= max_fret; j++) result[i].push((j + tuning[i]) % 12);   //fills the string array with an index for each fret
+        for (let j = SETTINGS.min_fret; j <= SETTINGS.max_fret; j++) result[i].push((j + SETTINGS.tuning[i]) % 12);   //fills the string array with an index for each fret
     }
 
     return result;

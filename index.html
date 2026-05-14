@@ -14,6 +14,7 @@
             <h2 id="title">something</h2>
         </div>
         <div class="controls-container">
+            <p class="selection-title shapes-title">SHAPES</p>
             <div class="tab-selector">
                 <ul class="selector tab">
                     <li id="chords">CHORDS</li>
@@ -36,6 +37,7 @@
                     <li value="harmonic">Harmonic</li>
                 </ul>
             </div>
+            <p class="selection-title roots-title">ROOT NOTES</p>
             <div class="root-selector">
                 <ul class="selector root" id="root-selector">
                     <li value="0"></li>
@@ -52,25 +54,29 @@
                     <li value="11"></li>
                 </ul>
             </div>
+            <p class="selection-title settings-title">SETTINGS</p>
             <div class="settings">
-                <div class="note-style">
-                    <div>
-                        <p>NOTE STYLE</p>
-                        <span id="default-notes">Default</span>
-                        <span id="alternative-notes">Alternative</span>
-                    </div>
-                    <div>
-                        <p>SEMITONES</p>
-                        <span id="sharp-notes">Sharp</span>
-                        <span id="flat-notes">Flat</span>
+                <div>
+                    <p>NOTE STYLE</p>
+                    <div class="select-style">
+                        <span id="default-notes" class="active" value="B">Default</span>
+                        <span id="alternative-notes" value="H">Alternative</span>
                     </div>
                 </div>
-                <div class="fret-range">
+                <div>
+                    <p>SEMITONES</p>
+                    <div class="select-semi">
+                        <span id="sharp-notes" class="active" value="">Sharp</span>
+                        <span id="flat-notes" value="1">Flat</span>
+                    </div>
+                </div>
+                <div>
                     <p>FRET RANGE</p>
-                    <span>FROM</span>
-                    <input type="number" id="input-min" min="0" max="12">
-                    <span>TO</span>
-                    <input type="number" id="input-max" min="4" max="21">
+                    <div class="select-range">
+                        <input type="number" id="input-min" min="0" max="12" value="0" class="input-fret">
+                        <span>&ndash;</span>
+                        <input type="number" id="input-max" min="4" max="21" value="21" class="input-fret">
+                    </div>
                 </div>
                 <div class="tuning"></div>
             </div>

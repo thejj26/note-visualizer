@@ -3,6 +3,20 @@
     padding: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+}
+
+input {
+    outline: none;
+}
+
 .inactive {
     display: none !important;
 }
@@ -30,11 +44,37 @@
     bottom: 16px;
     margin: 0 auto;
     display: flex;
+    padding-top: 32px;
+    padding-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.selection-title {
+    text-align: center;
+    position: absolute;
+    top: 2px;
+    font-size: 20px;
+}
+
+.shapes-title {
+    width: 25%;
+    left: 8px;
+}
+
+.roots-title {
+    width: 10%;
+    left: calc(25% + 8px);
+}
+
+.settings-title {
+    width: 15%;
+    left: calc(35% + 8px);
 }
 
 .tab-selector,
 .mode-selector,
-.root-selector {
+.root-selector,
+.settings {
     border-right: 1px solid #9e9e9e;
 }
 
@@ -48,13 +88,13 @@
     width: 10%;
 }
 
-.mode-selector {
+.mode-selector,
+.settings {
     width: 15%;
 }
 
 ul.selector {
     height: 100%;
-    padding: 12px 0;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -104,7 +144,7 @@ ul.selector {
     row-gap: 10px !important;
     column-gap: 24px !important;
     justify-content: space-evenly;
-    align-items:start;
+    align-items: start;
     align-content: space-between;
 }
 
@@ -128,10 +168,64 @@ li span {
     bottom: -3px;
 }
 
-#root-selector li.active{
-    background-color: #adf75a !important;
+#root-selector li.active {
+    background-color: #78ff78 !important;
 }
 
-#root-selector li:hover{
-    background-color: #d1f3aa;
+#root-selector li:hover {
+    background-color: #befcb8;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding-top: 8px;
+}
+
+.settings p {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.select-style,
+.select-semi{
+    display: flex;
+    gap: 16px;
+}
+
+.select-style span,
+.select-semi span {
+    width: 84px;
+    text-align: center;
+    font-size: 16px;
+    padding: 4px 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.select-style span:hover,
+.select-semi span:hover {
+    background: #f8e0ad;
+}
+
+.select-style .active,
+.select-semi .active {
+    background: #f8c351 !important;
+}
+
+.input-fret {
+    padding: 2px;
+    text-align: center;
+    border: 2px #9e9e9e solid;
+    border-radius: 8px;
+    
+}
+
+.select-range{
+    display: flex;
+    gap: 12px;
+    justify-content: center;
 }
