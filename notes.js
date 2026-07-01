@@ -82,6 +82,7 @@ let SETTINGS = {
 
 let fretboard = fillFretboard();                //2D matrix - x=fret, y=string
 let fretboard_filtered = filterFretboard([]);   //fretboard with only desired notes
+let shape_notes = []
 
 function setMaxFret(min, max) {
     if (min < 0 || max > 21 || min > 12 || max < 4 || max - min < 4) {/*warn user*/ }

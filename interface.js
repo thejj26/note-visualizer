@@ -11,6 +11,8 @@ const semitones = [document.getElementById("sharp-notes"), document.getElementBy
 const minFret = document.getElementById("input-min");
 const maxFret = document.getElementById("input-max");
 
+const noteFilter = document.getElementById("note-filter");
+
 let SELECTED = {
     tab: tabs[0],
     list: lists[0],
@@ -18,17 +20,36 @@ let SELECTED = {
     root: roots[0]
 }
 
-function getNotes() {    //returns a list of notes and sets the title
+function showShapeNotes() {
+    let _html = "";
+    noteFilter.innerHTML = "";
+    shape_notes.forEach(i => {
+        _html += `
+        <div class="note">
+            <input type="checkbox" id="note-${i}" value="${i}" checked="true">
+            <p>${roots[i].innerHTML}</p>
+        </div>
+        `;
+        noteFilter.innerHTML = _html;
+    });
+}
+
+function getNotes() {    //returns a list of notes and handles shape dependent elements
     let rootIndex = SELECTED.root.value;
+
     title.innerHTML = `
         ${!SETTINGS.flat ? SETTINGS.notes[rootIndex].base + (SETTINGS.notes[rootIndex].flat ? "#" : "") : (SETTINGS.notes[rootIndex].flat ? SETTINGS.notes[rootIndex].flat + "b" : SETTINGS.notes[rootIndex].base)
         } ${SELECTED.listElement.innerHTML.toUpperCase()} ${SELECTED.tab == tabs[0] ? "CHORD" : "SCALE"}
     `;
+
     let shape = SHAPES[SELECTED.tab == tabs[0] ? "CHORDS" : "SCALES"][SELECTED.listElement.getAttribute("value")];
-    return generateNotes(rootIndex, shape);
+
+    shape_notes = generateNotes(rootIndex, shape);
+
+    showShapeNotes();
 }
 
-function setRootNotes() {   //fills in symbols for all of the root notes
+function setNoteStyle() {   //fills in symbols for all of the root notes
     roots.forEach((el, i) => {
         if (!SETTINGS.notes[i].flat) {
             el.innerHTML = SETTINGS.notes[i].base;
@@ -40,7 +61,11 @@ function setRootNotes() {   //fills in symbols for all of the root notes
             el.innerHTML = SETTINGS.notes[i].flat;
             el.innerHTML += `<span class="sharp">b</span>`;
         }
-    })
+    });
+
+    [...noteFilter.children].forEach(el => {
+        el.children[1].innerHTML = roots[el.children[0].getAttribute("value")].innerHTML;
+    });
 }
 
 function setActiveUI() {    //refreshes the currecntly active UI element
@@ -77,12 +102,14 @@ function setSelectedStyle(style) {
     SETTINGS.notes = style == noteStyles[0] ? NOTES_DEFAULT : NOTES_ALT;
 
     setActiveUI();
+    setNoteStyle();
 }
 
 function setSelectedSemitone(semi) {
     SETTINGS.flat = !!semi.getAttribute("value");
 
     setActiveUI();
+    setNoteStyle();
 }
 
 tabs.forEach(el => el.addEventListener("click", () => setSelectedTab(el)));
@@ -91,6 +118,6 @@ roots.forEach(el => el.addEventListener("click", () => setSelectedRoot(el)));
 noteStyles.forEach(el => el.addEventListener("click", () => setSelectedStyle(el)));
 semitones.forEach(el => el.addEventListener("click", () => setSelectedSemitone(el)));
 
-setRootNotes();
+setNoteStyle();
 setActiveUI();
 getNotes();
