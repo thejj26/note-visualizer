@@ -79,10 +79,10 @@ let SETTINGS = {
     tuning: [7, 0, 5, 10]  //EADG is the standard tuning
 }
 
-
+let shape_notes = [];
 let fretboard = fillFretboard();                //2D matrix - x=fret, y=string
 let fretboard_filtered = filterFretboard([]);   //fretboard with only desired notes
-let shape_notes = []
+
 
 function setMaxFret(min, max) {
     if (min < 0 || max > 21 || min > 12 || max < 4 || max - min < 4) {/*warn user*/ }
@@ -107,10 +107,9 @@ function fillFretboard() {
     return result;
 }
 
-function filterFretboard(notes, ignored_notes = [], ignored_strings = []) {
-
+function filterFretboard() {
+    fretboard = fillFretboard();
     return fretboard.map((string, i) => {
-        if (ignored_strings.includes(i)) return string.map(note => -1); //fills all notes in the string with -1 if the string is ignored
-        else return string.map(note => notes.includes(note) && !ignored_notes.includes(note) ? note : -1);  //ignored and unused notes get set to -1
+        return string.map(note => shape_notes.includes(note) ? note : -1);  //ignored and unused notes get set to -1
     });
 }

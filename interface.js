@@ -26,7 +26,7 @@ function showShapeNotes() {
     shape_notes.forEach(i => {
         _html += `
         <div class="note">
-            <input type="checkbox" id="note-${i}" value="${i}" checked="true">
+            <input type="checkbox" id="note-${i}" value="${i}" checked="true" onchange="toggleNote(this)">
             <p>${roots[i].innerHTML}</p>
         </div>
         `;
@@ -45,6 +45,7 @@ function getNotes() {    //returns a list of notes and handles shape dependent e
     let shape = SHAPES[SELECTED.tab == tabs[0] ? "CHORDS" : "SCALES"][SELECTED.listElement.getAttribute("value")];
 
     shape_notes = generateNotes(rootIndex, shape);
+    fretboard = filterFretboard();
 
     showShapeNotes();
 }
@@ -84,18 +85,21 @@ function setSelectedTab(tab) {  //sets the active tab
     if (SELECTED.listElement.parentElement != SELECTED.list) SELECTED.listElement = SELECTED.list.children[0];
 
     setActiveUI();
+    getNotes();
 }
 
 function setSelectedElement(element) {  //sets the active element
     SELECTED.listElement = element;
 
     setActiveUI();
+    getNotes();
 }
 
 function setSelectedRoot(note) {    //sets the active root note
     SELECTED.root = note;
 
     setActiveUI();
+    getNotes();
 }
 
 function setSelectedStyle(style) {
@@ -111,6 +115,13 @@ function setSelectedSemitone(semi) {
     setActiveUI();
     setNoteStyle();
 }
+
+function toggleNote(note_DOM) {
+    if (note_DOM.checked) shape_notes.push(Number(note_DOM.value));
+    else shape_notes.splice(shape_notes.indexOf(Number(note_DOM.value)), 1);
+    fretboard = filterFretboard();
+}
+
 
 tabs.forEach(el => el.addEventListener("click", () => setSelectedTab(el)));
 listElements.forEach(el => el.addEventListener("click", () => setSelectedElement(el)));
